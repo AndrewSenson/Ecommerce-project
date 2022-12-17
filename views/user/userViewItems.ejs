@@ -1,0 +1,67 @@
+<%- include('../layout/header') %> 
+<%- include('../partials/userHeader.ejs') %> 
+
+<section>
+    <div class="container">
+        <!-- <div class="row mt-4">
+            <a href="" class="btn btn-success">Add Product</a>
+        </div> -->
+
+        
+          <table id="myTable" class="table mt-5">
+          <input type="text" class="mt-5 ml-auto" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Item Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Price</th>
+      <th scope="col">Image</th>
+      <th scope="col">Status</th>
+      <!-- <th>Image</th> -->
+      <!-- <th>       Edit/Delete</th> -->
+      
+    </tr>
+  </thead>
+  <tbody>
+    <!-- {{#each products}} -->
+    <% for(let i=0;i<inOrder.items.length;i++) { %> 
+        <tr>
+          <th scope="row"><%= i+1  %> </th>
+          
+    
+          <td><%= inOrder.items[i].itemId %> </td>
+          <td><%= inOrder.items[i].productName %> </td>
+          <td><%= inOrder.items[i].quantity %> </td>
+          <td><%= inOrder.items[i].price %> </td>
+          <td><img src="/images/<%= inOrder.items[i].image1 %> " style="height:50px" alt=""></td>
+          <td><%= inOrder.items[i].orderStatus %> </td>
+
+          <!-- <td><img style="width:50px;height:50px" src="" alt=""></td> -->
+          <td>
+           <% if(inOrder.items[i].orderStatus==='Vendor Cancelled'||inOrder.items[i].orderStatus==="User Cancelled"){ %> 
+                    <i class="fa fa-ban " style="font-size:48px;color:red ;" aria-hidden="true"></i>
+                </a>
+                <% }else if(inOrder.items[i].orderStatus==='Delivered'){ %> 
+                    <i class="fa fa-check " style="font-size:48px;color:green ;" aria-hidden="true"></i>
+                    <% }else{ %>
+                        <a href="/user-cancel-order?id=<%= inOrder.items[i].itemId %>&orderId=<%= inOrder._id %>  ">
+                            <button class="btn btn-danger" >Cancel</button>
+                          </a> 
+                          <% } %> 
+          </td>
+        </tr>
+        <% } %> 
+        <!-- {{/each}} -->
+  </tbody>
+</table>
+    </div>
+</section>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

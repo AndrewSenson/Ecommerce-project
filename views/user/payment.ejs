@@ -1,0 +1,283 @@
+<%- include('../layout/headerSecondary') %>
+<%- include('../partials/userHeader') %>
+
+
+<div class=" container-fluid my-5 ">
+    <div class="row justify-content-center ">
+        <div class="col-xl-10">
+            <div class="card shadow-lg ">
+                <div class="row p-2 mt-3 justify-content-between mx-sm-2">
+                </div>
+                
+                
+            
+                <div class="row justify-content-around">
+                    <div class="col-md-5">
+                        <div class="card border-5">
+                            <div class="card-header pb-0">
+                                <h2 class="card-title space">Do you have a coupon?</h2>
+                                <h6 class="text mb-3">Enter the code below and get an exciting offer</h6>
+
+                                <div class="mb-5">
+                                  <div class="form-outline">
+                                    
+                                    <div class="mb-5" style=" gap:10px;">
+                                      <form id="apply-coupon">
+                                        <input type="text" name="applyCoupon" id="form3Examplea2" class="form-control border border-1 border border-dark form-control-lg mb-2" />
+                                        <% if(validation.coupon===true){ %>
+                                          <p style="color:red ;">Invalid Coupon !</p>
+                                            <% } %> 
+              
+                                        <% if(validation.couponUser===true){ %>
+                                          <p style="color:red ;">Coupon already used !</p>
+                                            <% } %>  
+                                        <% if(validation.couponExpiry===true){ %>
+                                          <p style="color:red ;">Coupon Expired !</p>
+                                            <% } %>     
+                                        <% if(validation.couponMin===true){ %>
+                                            <p style="color:red ;">Cart value is below minimum limit</p>
+                                            <% } %>   
+                                        <% if(validation.couponSuccess===true){ %>
+                                            <p style="color:green ;">Coupon applied successfully !! enjoy the offer!</p>
+                                            <% } %>   
+                                        <button type="submit" class="btn btn-danger">Apply</button>
+                                      </form>
+                                    </div>
+                                    <label class="form-label" for="form3Examplea2">Enter your code</label>
+                                  </div>
+                                </div>
+                                <h2 class="card-title space">Payment Option</h2>
+                                <hr class="my-0 mt-4">
+
+                                <div class="">
+                                    <p class="card-text text-muted mt-4 mb-2  space">SELECT PAYMENT OPTION</p>
+                                </div>
+                                
+
+                                <!-- <form action="/test" method="post"> -->
+                                    <!-- <button class="btn btn-success" id="rzp-button1">Pay</button> -->
+                                <!-- </form> -->
+                                <form id="checkout-form">
+
+
+                                <div class="form-check">
+                                    <input class="form-check-input mt-5 mx-3" type="radio" name="paymentType" required id="flexRadioDefault1" value="razorpay">
+                                    <label class="form-check-label" for="flexRadioDefault1">
+                                        <img class="" src="https://upload.wikimedia.org/wikipedia/en/8/89/Razorpay_logo.svg" alt="" height="100" width="200">
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input mt-4 mx-3" type="radio" name="paymentType" required id="flexRadioDefault2" value="paypal" >
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                      <img src="https://pngimg.com/uploads/paypal/paypal_PNG15.png" alt="" height="60" width="200">
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input mt-5 mx-3" type="radio" name="paymentType" required id="flexRadioDefault2" value="cod" >
+                                    <label class="form-check-label" for="flexRadioDefault2">
+                                      <img src="/images/cod.jpg" alt="" height="80" width="200">
+                                    </label>
+                                  </div>
+
+
+
+
+
+                            </div> 
+                        </div>
+                    </div>
+                     <div class="col-md-5 mt-0">
+                        <div class="card border-3 ">
+                            <div class="card-header card-2">
+                                <p class="card-text text-muted mt-md-4 space">ORDER SUMMARY </p>
+                                <!-- <hr class="my-2"> -->
+                            </div>
+
+
+                            <div class="card-body pt-5">
+                                <% for(let i=0; i<cart.items.length; i++) { %> 
+                                    <div class="row  justify-content-between">
+                                        <div class="col-auto col-md-7">
+                                            <div class="media flex-column flex-sm-row">
+                                                <img class=" img-fluid mb-2" src="/images/<%= cart.items[i].image1 %> " width="62" height="62">
+                                                <div class="media-body  my-auto">
+                                                    <div class="row ">
+                                                        <div class="col-auto"><h6 class="mb-0"><b><%= cart.items[i].productName %> </b></h6><small class="text-muted"><%= cart.items[i].category %> </small></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class=" pl-0 flex-sm-col col-auto  my-auto"> <h6 class=""><%= cart.items[i].quantity %> </h6></div>
+                                        <div class=" pl-0 flex-sm-col col-auto  my-auto "><h6><b>₹ <%= cart.items[i].price %> </b></h6></div>
+                                    </div>
+                                    <hr class="my-2">
+                                    <% } %> 
+    
+                                    
+                                    
+    
+    
+                                    <div class="row mt-5">
+                                        <div class="col">
+                                            <div class="row justify-content-between">
+                                                <div class="col-4"><h6 class="mb-3"><b>Subtotal</b></h6></div>
+                                                <div  class="flex-sm-col col-auto"><h6 class="mb-3"><b>₹ <%= cart.bill %> </b></h6></div>
+                                            </div>
+                                            <input value="<%= cart.bill %> " type="text" name="" id="cartValue" hidden>
+                                            
+                
+                                            <div class="row justify-content-between">
+                                                <div class="col"><h6 class="mb-3"><b>Shipping</b></h6></div>
+                                                <div  class="flex-sm-col col-auto"><h6 id="sample" class="mb-3" style="color: green"><b>Free</b></h6></div>
+                                            </div>
+                                            <div class="row justify-content-between">
+                                                <div class="col-4"><h6 ><b>Total</b></h6></div>
+                                                <div  class="flex-sm-col col-auto"><h6 id="sample1" class="mb-3"><b>₹ <%= cart.bill %> </b></h6> </div>
+                                            </div><hr class="my-0">
+                                            <input type="hidden" id="discountedBill" name="Bill" value="">
+                                        </div>
+                                    </div>
+    
+                                        <div class="row mb-5 mt-4 ">
+                                            <div class="col-md-7 col-lg-6 mx-auto"><button type="submit" class="btn btn-block btn-outline-dark btn-lg">Confirm Order</button></div>
+                                        </div>
+                                    </form>
+                                                                    
+                                    
+                                
+                                </div>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+
+
+
+
+
+            <script>
+          
+            let cartValue = document.getElementById('cartValue').value
+   
+
+        $("#apply-coupon").submit((e)=>{
+            console.log("ajax working")
+            e.preventDefault()  
+            $.ajax({
+            url:'/apply-coupon',
+            method:'post',
+            data:$('#apply-coupon').serialize(),
+            success:(response)=>{  
+                console.log("The response")
+
+                if(response.couponValue){
+                    discountedBill = cartValue - response.couponValue
+                    document.getElementById('sample').innerHTML = response.couponValue
+                    document.getElementById('sample1').innerHTML = discountedBill
+                    document.getElementById('discountedBill').value=discountedBill
+                // console.log(response.couponValue)
+                // console.log(response.couponCode)
+                console.log(cartValue);
+                console.log(response.couponValue);
+                console.log(discountedBill);
+                        // window.open('/userhome/success')
+                }else {
+                    location.replace('/payment')
+
+                }
+            }
+            })
+        }) 
+            </script>
+
+
+            <script>
+
+        $("#checkout-form").submit((e)=>{
+            console.log("ajax working")
+            e.preventDefault()  
+            $.ajax({
+            url:'/payment-success',
+            method:'post',
+            data:$('#checkout-form').serialize(),
+            success:(response)=>{  
+                console.log("The response")
+                
+                if(response.codSuccess){
+                    console.log("COD working")
+                    location.replace('/payment-success?value=cod')
+                        // window.open('/userhome/success')
+                }else if(response.razorpay){
+                    console.log("razorpay working")
+                    razorpayPayment(response.order)
+                }else if(response.paypal){
+                    console.log("calling the paypal")
+                    location.replace('/paypal')
+                } 
+            }
+            })
+        }) 
+        
+        
+
+        function razorpayPayment(order){
+            console.log(order)
+        var options = {
+            "key": "rzp_test_15qrYZ3mdX7ART", // Enter the Key ID generated from the Dashboard
+            "amount":order.amount , // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "Camper Trek",
+            "description": "Test Transaction",
+            "image": "/images/logo.png",
+            "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response){
+                RazoverifyPayment(response,order)
+            },
+            "prefill": {
+                "name": "Zay cart",
+                "email": "Zaycart@gmail.com",
+                "contact": "+91 9072016272"
+            },
+            "notes": {
+                "address": "Zay cart pvt ltd., Trivandrum, India."
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        }
+        
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+        }
+        function RazoverifyPayment(payment,order){
+            location.replace('/payment-success')
+
+            $.ajax({
+            url:'/userhome/razo-verify-payment',
+            data:{
+                payment,
+                order
+            },
+            method:'post',
+            success:(response)=>{
+                if(response.status){
+                console.log("succes")
+                    location.href='/payment-success'
+                }else{
+                // need to render payment faild page
+                location.reload()
+                alert("payment failed")
+                }
+            }
+            })
+        }
+
+
+            </script>

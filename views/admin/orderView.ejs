@@ -1,0 +1,115 @@
+<%- include('../layout/header') %> 
+<%- include('../partials/adminHeader.ejs') %> 
+
+<section>
+    <div class="container-fluid">
+        <!-- <div class="row mt-4">
+            <a href="" class="btn btn-success">Add Product</a>
+        </div> -->
+        <div class="container-fluid">
+          <div class="btn-group pt-5 contact">
+            <a class="btn btn-primary dropdown-toggle mb-2" data-bs-toggle="dropdown" aria-expanded="false">
+                Download
+            </a>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/admin/exportExcel">Excel</a></li>
+                <li><button class="dropdown-item" onclick="myfun('pt')">Pdf</button></li>
+          
+            </ul>
+          </div>
+          </div>
+        
+        <div class="table-wrap" id="pt">
+
+          <table id="myTable" class="table mt-5">
+        
+            <thead>
+              <tr>
+                <th scope="col">No</th>
+                <th scope="col">Item Id</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Price</th>
+                <th scope="col">Image</th>
+                <th scope="col">Status</th>
+                <th scope="col">Edit/Delete</th>
+              
+              </tr>
+            </thead>
+            <tbody>
+              <!-- {{#each products}} -->
+              <% for(let i=0;i<order.items.length;i++) { %> 
+                  <tr>
+                    <th scope="row"><%= i+1  %> </th>
+                    
+              
+                    <td><%= order.items[i].itemId %> </td>
+                    <td><%= order.items[i].productName%> </td>
+                    <td><%= order.items[i].quantity%> </td>
+                    <td><%= order.items[i].price%> </td>
+                    <td><img src="/images/<%= order.items[i].image1 %>" style="height:50px ;" alt="" > </td>
+                    <td><%= order.items[i].orderStatus%> </td>
+
+
+                    <!-- <td><img style="width:50px;height:50px" src="" alt=""></td> -->
+                    <td>
+                    <% if(order.items[i].orderStatus==="processed"){ %> 
+                        <a href="/order-accept?id=<%= order.items[i].itemId %>&orderId=<%= order._id %>  ">
+                          <button class="btn btn-success" >Accept</button>
+                        </a>
+                      
+                        <a href="/order-cancel?id=<%= order.items[i].itemId %>&orderId=<%= order._id %>  ">
+                          <button class="btn btn-danger" >Cancel</button>
+                        </a>
+                        <% }else if(order.items[i].orderStatus==='Approved'){ %> 
+                          <a href="/order-processed?id=<%= order.items[i].itemId %>&orderId=<%= order._id %>  ">
+                              <button class="btn btn-warning" >Shipped</button>
+                            </a>
+                      <% }else if(order.items[i].orderStatus==='Shipped') {%> 
+                          <a href="/order-shipped?id=<%= order.items[i].itemId %>&orderId=<%= order._id %>  ">
+                              <button class="btn btn-info" >Delivered</button>
+                            </a>
+                      <% }else if(order.items[i].orderStatus==='Delivered'){ %> 
+                          
+                              <i class="fa fa-check" style="font-size:48px;color:green"></i>
+                          
+                          <% }else if(order.items[i].orderStatus==='User Cancelled'||order.items[i].orderStatus==='Vendor Cancelled'){ %> 
+                              <i class="fa fa-ban " style="font-size:48px;color:red ;" aria-hidden="true"></i>
+                              <% } %> 
+
+                    </td>
+                  </tr>
+                  <% } %> 
+                  <!-- {{/each}} -->
+            </tbody>
+</table>
+
+        </div>
+
+
+    </div>
+</section>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+
+
+<script>
+  console.log("script working")
+  function myfun(pt) {
+      var bk = document.body.innerHTML;
+      var dv = document.getElementById('pt').innerHTML;
+      document.body.innerHTML = dv;
+      document.body.style.padding = "20px"
+      window.print();
+      location.reload();
+  }
+  $(document).ready(function () {
+      $('#myTable').DataTable()
+  });
+</script>

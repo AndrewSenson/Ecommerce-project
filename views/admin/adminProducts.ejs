@@ -1,0 +1,71 @@
+<%- include('../layout/header') %>
+<%- include('../partials/adminHeader') %>
+
+
+<section>
+    <div class="container">
+        <!-- <div class="row mt-4">
+            <a href="" class="btn btn-success">Add Product</a>
+        </div> -->
+
+        
+          <table id="myTable" class="table mt-5">
+         
+          <a href="/add-products"><br><br><button class="btn btn-primary" type="button">Add Products</button></a>
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col" >Product Name </th>
+      <th scope="col">Price </th>
+      <th scope="col">Stock </th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <!-- <th scope="col">Sub Category </th> -->
+      <th scope="col">Image 1 </th>
+      <th scope="col">Image 2 </th>
+      <!-- <th>Image</th> -->
+      <th>  Action</th>
+      
+    </tr>
+  </thead>
+  <% for(let i=0;i<result.length;i++){ %> 
+  <tbody>
+    <!-- {{#each products}} -->
+   <tr>
+    <th scope="row"><%= 1+i %> </th>
+    <td><%= result[i].productName %> </td>
+    <td>&#8377;<%= result[i].price %> </td>
+    <td><%= result[i].stock %> </td>
+    <td><%= result[i].description %> </td>
+    <td><%= result[i].category%> </td>
+   
+    <td><img src="/images/<%= result[i].image1 %>" style="height:50px ;" alt="product image1"></td>
+    <td><img src="/images/<%= result[i].image2 %>" style="height:50px ;" alt="product image2"></td>
+    <td>
+      <a href="/admin_panel/edit-product?id=<%= result[i]._id  %> ">
+        <i class="fa fa-edit" aria-hidden="true" style="font-size:24px" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+      </a><br>
+      <a onclick="return confirm('Are you sure to delete this product?')" href="/admin_panel/delete-product?id=<%= result[i]._id  %> ">
+        <i class="fa fa-trash" aria-hidden="true" style="font-size:24px" data-bs-toggle="modal" data-bs-target="#staticBackdrop"></i>
+      </a>
+    </td>
+
+   
+  </tbody>
+  <% }%> 
+</table>
+    </div>
+</section>
+
+
+
+
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+

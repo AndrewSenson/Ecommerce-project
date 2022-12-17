@@ -1,0 +1,58 @@
+<%- include('../layout/header') %> 
+<%- include('../partials/adminHeader.ejs') %> 
+
+<section class="container">
+    <div class="container-fluid">
+      <form class="category-form mb-5 mt-4" action="/admin-category" method="post">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Add New Category</label>
+          <input type="text" class="form-control" name="category" required id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter category">
+   
+        </div>
+        <% if(validation.category===true){ %>
+          <p style="color: red;">The submitted category already exists</p>
+        <% } %> 
+        <button type="submit" class="btn btn-warning">Submit category</button>
+      
+      </form>
+      <br>
+        
+          <table id="myTable" class="table mt-5">
+        
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">category</th>
+      <th scope="col"></th>
+  
+    </tr>
+  </thead>
+  <tbody>
+    <!-- {{#each products}} -->
+    <% for(let i=0;i<category.length;i++) { %> 
+        <tr>
+          <th scope="row"><%= i+1  %> </th> 
+          
+    
+          <td><%= category[i].category%> </td>
+       
+          <td>
+            <a onclick="return confirm('Are you sure to delete this product?')" href="/category-delete?catName=<%= category[i].category %> ">
+              <button class="btn btn-danger" >Delete</button>
+            </a>
+
+          </td>
+        </tr>
+        <% } %> 
+        <!-- {{/each}} -->
+  </tbody>
+</table>
+
+</section>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

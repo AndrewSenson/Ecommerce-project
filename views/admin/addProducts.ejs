@@ -1,0 +1,111 @@
+<%- include('../layout/header') %>
+<%- include('../partials/adminHeader') %>
+
+<% if(prod){ %> 
+    
+    <div class="wrapper container" >
+
+        <div class="row justify-content-center mt-5"> 
+            <div class="col-4"> 
+                <form action="/admin_panel/add-product/update?id=<%= prod._id %> " method="post" enctype="multipart/form-data"> 
+          
+                    <div class="form-group"> 
+                        <label for="exampleInputName1">Product Name</label> 
+                        <input type="name" name="productName" value="<%= prod.productName %> " class="form-control" id="name"> 
+                    </div> 
+                    <div class="form-group mt-3">   
+                        <label for="exampleInputExpertise1">Price</label> 
+                        <input type="price" name="price" value="<%= prod.price %> " class="form-control" id="price"> 
+                    </div> 
+                    <div class="form-group mt-3"> 
+                        <label for="exampleInputDescription1">Description</label> 
+                        <input type="description" name="description" value="<%= prod.description %> " class="form-control" id="description"> 
+                    </div> 
+                    <div class="form-group  mt-3"> 
+                        <label for="exampleInputFees1">Stock</label> 
+                        <input type="stock" name="stock" class="form-control" value="<%= prod.stock %>" id="stock"> 
+                    </div> 
+                    <div class="form-group mt-3"> 
+                        <select class="form-select" name="category" aria-label="Default select example"> 
+                            <option selected><%= prod.category %></option> 
+                            <option value="clothes">Clothes</option> 
+                            <option value="Shoes">Shoes</option> 
+                            <option value="Accessories">Accessories</option> 
+                          </select> 
+                    </div> 
+                    <!-- <div class="form-group mt-3"> 
+                        <select class="form-select" name="subCategory" aria-label="Default select example"> 
+                            <option selected><%= //prod.subCategory %> </option> 
+                            <option value="1">One</option> 
+                            <option value="2">Two</option> 
+                            <option value="3">Three</option> 
+                          </select> 
+                    </div>  -->
+                    <div class="row"> 
+                        <div class="mt-3"> 
+                            <input type="file" class="form-control" name="images"  id="formFile" accept="image/*"> 
+                        </div> 
+                        <div class="mt-3"> 
+                            <input type="file" class="form-control" name="images" id="formFile" accept="image/*"> 
+                        </div> 
+                        <button type="submit" class="btn btn-warning mt-3">Update</button> 
+                    </div> 
+                </form> 
+            </div> 
+          </div>
+        </div>
+<% }else{ %> 
+<div class="wrapper container" >
+
+<div class="row justify-content-center mt-5"> 
+    <div class="col-4"> 
+        <form action="/admin_panel/add-product" method="post" enctype="multipart/form-data"> 
+  
+            <div class="form-group"> 
+                <label for="exampleInputName1">Product Name</label> 
+                <input type="name" name="productName" class="form-control" id="name"> 
+            </div> 
+            <div class="form-group mt-3"> 
+                <label for="exampleInputExpertise1">Price</label> 
+                <input type="price" name="price" class="form-control" id="price"> 
+            </div> 
+            <div class="form-group mt-3"> 
+                <label for="exampleInputDescription1">Description</label> 
+                <input type="description" name="description" class="form-control" id="description"> 
+            </div> 
+            <div class="form-group  mt-3"> 
+                <label for="exampleInputFees1">Stock</label> 
+                <input type="stock" name="stock" class="form-control" id="stock"> 
+            </div> 
+            <div class="form-group mt-3"> 
+                <select class="form-select" name="category" aria-label="Default select example"> 
+                    
+                    <option selected>Category</option> 
+                    <% for(i=0;i<category.length;i++){ %>  
+                    <option value="<%= category[i].category%>"><%= category[i].category %> </option>
+                  <% } %> 
+                </select> 
+            </div> 
+            <!-- <div class="form-group mt-3"> 
+                <select class="form-select" name="subCategory" aria-label="Default select example"> 
+                    <option selected>Sub-Category</option> 
+                    <option value="1">One</option> 
+                    <option value="2">Two</option> 
+                    <option value="3">Three</option> 
+                  </select> 
+            </div>  -->
+            <div class="row"> 
+                <div class="mt-3"> 
+                    <input type="file" class="form-control" name="images" id="formFile" accept="image/*"> 
+                </div> 
+                <div class="mt-3"> 
+                    <input type="file" class="form-control" name="images" id="formFile" accept="image/*"> 
+                </div> 
+                <button type="submit" class="btn btn-warning mt-3">Add Product</button> 
+            </div> 
+        </form> 
+    </div> 
+  </div>
+</div>
+
+<% } %> 

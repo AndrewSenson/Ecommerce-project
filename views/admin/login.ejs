@@ -1,0 +1,111 @@
+<%- include('../layout/header') %>
+
+ <!-- Header -->
+ <nav class="navbar navbar-expand-lg navbar-light shadow">
+  <div class="container d-flex justify-content-between align-items-center">
+
+      <a class="navbar-brand text-success logo h1 align-self-center" href="admin_panel">
+          Admin
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#templatemo_main_nav" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="align-self-center collapse navbar-collapse flex-fill  d-lg-flex justify-content-lg-between" id="templatemo_main_nav">
+          <div class="flex-fill">
+              <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
+                  <!-- <li class="nav-item">
+                      <a class="nav-link" href="user_home">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="about.html">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="shop.html">Shop</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="contact.html">Contact</a>
+                  </li> -->
+              </ul>
+          </div>
+          <div class="navbar align-self-center d-flex">
+              <div class="d-lg-none flex-sm-fill mt-3 mb-4 col-7 col-sm-auto pr-3">
+                  <div class="input-group">
+                      <input type="text" class="form-control" id="inputMobileSearch" placeholder="Search ...">
+                      <div class="input-group-text">
+                          <i class="fa fa-fw fa-search"></i>
+                      </div>
+                  </div>
+              </div>
+              <!-- <a class="nav-icon d-none d-lg-inline" href="#" data-bs-toggle="modal" data-bs-target="#templatemo_search">
+                  <i class="fa fa-fw fa-search text-dark mr-2"></i>
+              </a> -->
+              <!-- <a class="nav-icon position-relative text-decoration-none" href="#">
+                  <i class="fa fa-fw fa-cart-arrow-down text-dark mr-1"></i>
+                  <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">7</span>
+              </a> -->
+              <!-- <a class="nav-icon position-relative text-decoration-none" href="#">
+                  <i class="fa fa-fw fa-user text-dark mr-3"></i>
+                  <span class="position-absolute top-0 left-100 translate-middle badge rounded-pill bg-light text-dark">+99</span>
+              </a> -->
+              <!-- <a href="/user_logout"><button class="btn btn-danger" type="button">Logout</button></a> -->
+          </div>
+      </div>
+
+  </div>
+</nav>
+<!-- Close Header -->
+
+
+	<section class="vh-100">
+		<div class="container-fluid h-custom">
+		  <div class="row d-flex justify-content-center align-items-center h-100">
+			<div class="col-md-9 col-lg-6 col-xl-5">
+			  <img src="/images/imageloginadmin.jpg"
+				class="img-fluid" alt="Sample image">
+			</div>
+			<div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+			  <form action="/admin_login" method="post">
+				
+	  
+				<div class="d-flex align-items-center mb-3 pb-1">
+					<!-- <i class="fa fa-retweet fa-2x me-3" style="color: #ff6219;"></i> -->
+          <!-- <img class="logo-main" src="/images/Style.png" alt="logo"> -->
+					<span class="h1-main fw-bold mb-0">Zay</span>
+				  </div>
+	  
+				<!-- Email input -->
+				<div class="form-outline mb-4">
+          <label class="form-label"  for="form3Example3">Username</label>
+				  <input type="text" id="form3Example3" name="name" class="form-control form-control-lg"
+					placeholder="Enter admin's username" />
+				 
+				</div>
+	  
+				<!-- Password input -->
+				<div class="form-outline mb-3">
+          <label class="form-label" for="form3Example4">Password</label>
+				  <input type="password" id="form3Example4" name="password" class="form-control form-control-lg"
+					placeholder="Enter password" />
+				  
+				</div>
+	  
+				<div class="d-flex justify-content-between align-items-center">
+				  <!-- Checkbox -->
+			
+	  
+				<div class="text-center text-lg-start mt-4 pt-2">
+				  <button type="submit" class="btn btn-success btn-lg"
+					style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+				  <p class="small fw-bold mt-2 pt-1 mb-0">Admin Login Here</p>
+				</div>
+	  
+			  </form>
+			</div>
+		  </div>
+		</div>
+		
+		  <!-- Right -->
+		</div>
+	  </section>

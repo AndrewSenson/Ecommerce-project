@@ -1,0 +1,105 @@
+<%- include('../layout/header') %>
+
+<!-- </%- include('../layout/header.ejs')  %>   -->
+ 
+ 
+<section class="vh-100" style="background-color: rgb(0, 0, 0);">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col col-xl-10">
+        <div class="card" style="border-radius: 1rem;">
+          <div class="row g-0">
+            <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <img src="/images/otp login 1.jpg"
+                alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 500px;" />
+            </div>
+            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="card-body p-4 p-lg-5 text-black">
+
+                <form action="/user/send-otp" method="post">
+
+                  <div class="d-flex align-items-center mb-3 pb-1">
+                    <i class="fa fa-retweet fa-2x me-3" style="color: #ff6219;"></i>
+                    <span class="h1 fw-bold mb-0">OTP Login</span>
+                  </div>
+
+                  <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign into your account</h5>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example17">PhoneNumber</label>
+                    <input type="tel" name="mobile" id="form2Example17" class="form-control form-control-lg" />
+                    <a href=""><button type="submit" class="btn btn-primary mt-3">Send OTP</button></a>
+
+                  </div>
+                  <p class="mb-5 pb-lg-2" style="color: #000000;">Login with email <a href="user_login"
+                      style="color: #000000;">Click here</a></p>
+
+                  
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<script>
+  const inputs = document.querySelectorAll(".otp-field input");
+
+  inputs.forEach((input, index) => {
+  input.dataset.index = index;
+  input.addEventListener("keyup", handleOtp);
+  input.addEventListener("paste", handleOnPasteOtp);
+  });
+
+  function handleOtp(e) {
+  /**
+   * <input type="text" 👉 maxlength="1" />
+   * 👉 NOTE: On mobile devices maxlength property isn't supported,
+   * So we to write our own logic to make it work. 🙂
+   */
+  const input = e.target;
+  let value = input.value;
+  let isValidInput = value.match(/[0-9a-z]/gi);
+  input.value = "";
+  input.value = isValidInput ? value[0] : "";
+  let fieldIndex = input.dataset.index;
+    if (fieldIndex < inputs.length - 1 && isValidInput) {
+        input.nextElementSibling.focus();
+    }
+
+    if (e.key === "Backspace" && fieldIndex > 0) {
+        input.previousElementSibling.focus();
+    }
+
+    // if (fieldIndex == inputs.length - 1 && isValidInput) {
+    //     submit();
+    // }
+    }
+
+    function handleOnPasteOtp(e) {
+    const data = e.clipboardData.getData("text");
+    const value = data.split("");
+        if (value.length === inputs.length) {
+            inputs.forEach((input, index) => (input.value = value[index]));
+            submit();   
+        }
+    }
+
+    // function submit() {
+    // console.log("Submitting...");
+    // // 👇 Entered OTP
+    // let otp = "";
+    // inputs.forEach((input) => {
+    //     otp += input.value;
+    //     input.disabled = true;
+    //     input.classList.add("disabled");
+    // });
+    // console.log(otp);
+    // // 👉 Call API below
+    // }
+</script>

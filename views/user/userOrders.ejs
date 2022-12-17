@@ -1,0 +1,60 @@
+<%- include('../layout/header') %> 
+<%- include('../partials/userHeader.ejs') %> 
+
+<section>
+    <div class="container">
+        <!-- <div class="row mt-4">
+            <a href="" class="btn btn-success">Add Product</a>
+        </div> -->
+
+        
+          <table id="myTable" class="table mt-5">
+          <input type="text" class="mt-5 ml-auto" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Order Id</th>
+      <th scope="col">Date</th>
+      <th scope="col">Bill Amount</th>
+      <th scope="col">Mode of Payment</th>
+      <th scope="col">Edit/Delete</th>
+      <!-- <th>Image</th> -->
+      <!-- <th>       Edit/Delete</th> -->
+      
+    </tr>
+  </thead>
+  <tbody>
+    <!-- {{#each products}} -->
+    <% for(let i=0;i<orders.length;i++) { %> 
+        <tr>
+          <th scope="row"><%= i+1  %> </th>
+          
+    
+          <td><%= orders[i]._id %> </td>
+          <td><%= orders[i].orderDate%> </td>
+          <td><%= orders[i].bill %> </td>
+          
+          <td><%= orders[i].paymentMode %></td>
+
+
+          <!-- <td><img style="width:50px;height:50px" src="" alt=""></td> -->
+          <td>
+           
+                <a href="/user-viewItems?id=<%= orders[i]._id %> ">
+                    <button class="btn btn-success" >View Details</button>
+                </a>
+          </td>
+        </tr>
+        <% } %> 
+        <!-- {{/each}} -->
+  </tbody>
+</table>
+    </div>
+</section>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>

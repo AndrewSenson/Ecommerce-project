@@ -1,0 +1,62 @@
+<%- include('../layout/header') %> 
+<%- include('../partials/adminHeader.ejs') %> 
+
+<section>
+    <div class="container">
+        <!-- <div class="row mt-4">
+            <a href="" class="btn btn-success">Add Product</a>
+        </div> -->
+
+        
+          <table id="myTable" class="table mt-5">
+         
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Title</th>
+      <th scope="col">Category</th>
+      <th scope="col">Description</th>
+      <!-- <th>Image</th> -->
+      <th>       Edit/Delete</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+    <!-- {{#each products}} -->
+    <% for(let i=0;i<users.length;i++) { %> 
+        <tr>
+          <th scope="row"><%= i+1  %> </th>
+          
+    
+          <td><%= users[i].name %> </td>
+          <td><%= users[i].email %></td>
+          <td></td>
+         
+          <td>
+            <% if(users[i].blockStatus){ %> 
+                <form action="admin_panel/user-management/unblock?id=<%= users[i]._id %> " method="post">
+                <button  class="btn btn-primary" onclick="return  confirm('Do you want to unblock <%= users[i].name %>')" >Unblock</button>
+            </form>
+                
+            
+            <% }else{ %> 
+                <form action="admin_panel/user-management/block?id=<%= users[i]._id %> " method="post" >
+                    <button class="btn btn-danger" onclick="return  confirm('Do you want to block <%= users[i].name %>')">Block</button>
+                </form>
+            <% } %> 
+          </td>
+        </tr>
+        <% }%> 
+        <!-- {{/each}} -->
+  </tbody>
+</table>
+    </div>
+</section>
+
+<script>
+  $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+</script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
