@@ -11,7 +11,7 @@ const sessions=require('express-session')
 app.use(express.static('public'))
 
 dotenv.config({path:"config.env"})
-const PORT=process.env.PORT || 8080
+const PORT=process.env.PORT || 3000
 
 app.set('view engine','ejs')
 app.use(express.urlencoded({extended:false}))
