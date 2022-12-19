@@ -3,8 +3,9 @@ const mongoose =require('mongoose')
 module.exports={
     connectToDb:(cb)=>{
         mongoose.connect(process.env.PORT,{
-    usenewurlparser: true,
-    useunifiedtopology: true,
+    useUnifiedTopology:true,
+            useNewUrlParser: true,
+            useCreateIndex: true
   })
         .then(()=>{console.log("connected to db")
         return cb()
